@@ -1,0 +1,26 @@
+request_id,timestamp,customer_name,agent_name,action,amount,decision,rule_number,reason
+REQ-8001,2026-11-16 11:20:05,Rohan Sharma,Rohan Personal Assistant,View Balance,0.0,ALLOW,R4,Registered and active AI agents can view balance without additional customer confirmation.
+REQ-8002,2026-11-16 13:45:12,Priya Nair,Priya SmartFin Bot,Pay Bill,3200.0,ALLOW,R5,"Registered and active agent with customer-granted bill-payment permission authorized for bill payment of ₹3,200.00 (<= ₹5,000)."
+REQ-8003,2026-11-16 15:10:33,Priya Nair,Priya SmartFin Bot,Transfer Money,2500.0,ASK CUSTOMER,R7,Every transfer money request must return ASK CUSTOMER regardless of amount.
+REQ-8004,2026-11-17 09:05:40,Sneha Roy,Sneha Expense Manager,View Balance,0.0,BLOCK,R1,Agent 'Sneha Expense Manager' has been revoked. All requests are strictly BLOCKED.
+REQ-7541,2026-11-17 20:43:00,Test Customer,Test Agent,Pay Bill,3500.0,ALLOW,R5,Test automated verification
+REQ-7768,2026-11-17 20:44:42,Test Customer,Test Agent,Pay Bill,3500.0,ALLOW,R5,Test automated verification
+REQ-2039,2026-11-17 20:47:26,Test Customer,Test Agent,Pay Bill,3500.0,ALLOW,R5,Test automated verification
+REQ-6630,2026-11-17 20:49:41,Kavita Rao,Kavita Autonomous FinBot,Pay Bill,3500.0,ALLOW,R5,"Registered and active agent with customer-granted bill-payment permission can PAY BILLS up to ₹5,000 automatically (Requested: ₹3,500.00)."
+REQ-2814,2026-11-17 20:49:41,Kavita Rao,Kavita Autonomous FinBot,Revoke Agent Authority,0.0,BLOCK,R1,Administrator revoked agent authority on 2026-11-17 20:49:41. Reason: Security Audit: Compromised API key and anomalous frequency detected
+REQ-3995,2026-11-17 20:49:41,Kavita Rao,Kavita Autonomous FinBot,Pay Bill,3500.0,BLOCK,R1,Agent 'Kavita Autonomous FinBot' has been permanently REVOKED on 2026-11-17 20:49:41 (Security Audit: Compromised API key and anomalous frequency detected). All requests from revoked agents must be BLOCKED.
+REQ-1031,2026-11-17 20:49:51,Test Customer,Test Agent,Pay Bill,3500.0,ALLOW,R5,Test automated verification
+REQ-9757,2026-11-17 20:54:07,Aditya Sen,Aditya Investment Assistant,Agent Registration,0.0,ALLOW,REG,"New AI agent 'Aditya Investment Assistant' enrolled with ID AGT-1006. Permissions: View Balance=Yes, Pay Bills=Yes, Transfer Money=Yes."
+REQ-7173,2026-11-17 20:54:07,Aditya Sen,Aditya Investment Assistant,Pay Bill,4800.0,ALLOW,R5,"Registered and active agent with customer-granted bill-payment permission can PAY BILLS up to ₹5,000 automatically (Requested: ₹4,800.00)."
+REQ-2886,2026-11-17 20:54:07,Aditya Sen,Aditya Investment Assistant,Agent Revocation,0.0,BLOCK,R1,Administrator revoked agent 'Aditya Investment Assistant' (AGT-1006). Revocation Timestamp: 2026-11-17 20:54:07. Reason: Customer lost device containing agent credentials.
+REQ-4571,2026-11-17 20:54:25,Test Customer,Test Agent,Pay Bill,3500.0,ALLOW,R5,Test automated verification
+REQ-4909,2026-11-17 20:54:51,Kavita Rao,Kavita Autonomous FinBot,Agent Registration,0.0,ALLOW,REG,"New AI agent 'Kavita Autonomous FinBot' enrolled with ID AGT-1007. Permissions: View Balance=Yes, Pay Bills=Yes, Transfer Money=Yes."
+REQ-5427,2026-11-17 20:54:51,Kavita Rao,Kavita Autonomous FinBot,Pay Bill,3500.0,ALLOW,R5,"Registered and active agent with customer-granted bill-payment permission can PAY BILLS up to ₹5,000 automatically (Requested: ₹3,500.00)."
+REQ-2503,2026-11-17 20:54:51,Kavita Rao,Kavita Autonomous FinBot,Agent Revocation,0.0,BLOCK,R1,Administrator revoked agent 'Kavita Autonomous FinBot' (AGT-1007). Revocation Timestamp: 2026-11-17 20:54:51. Reason: Security Audit: Compromised API key and anomalous frequency detected.
+REQ-5293,2026-11-17 20:54:51,Kavita Rao,Kavita Autonomous FinBot,Pay Bill,3500.0,BLOCK,R1,Agent 'Kavita Autonomous FinBot' has been permanently REVOKED on 2026-11-17 20:49:41 (Security Audit: Compromised API key and anomalous frequency detected). All requests from revoked agents must be BLOCKED.
+REQ-6200,2026-11-17 21:25:55,Test Customer,Test Agent,Pay Bill,3500.0,ALLOW,R5,Test automated verification
+REQ-9044,2026-11-17 21:31:41,Test Customer,Test Agent,Pay Bill,3500.0,ALLOW,R5,Test automated verification
+REQ-8401,2026-11-17 21:35:33,Test Customer,Test Agent,Pay Bill,3500.0,ALLOW,R5,Test automated verification
+REQ-5210,2026-11-17 21:48:20,ATUL DOGRA,Atul's bot,Agent Registration,0.0,ALLOW,REG,"New AI agent 'Atul's bot' enrolled with ID AGT-1008. Permissions: View Balance=Yes, Pay Bills=Yes, Transfer Money=Yes."
+REQ-1305,2026-11-17 21:49:35,ATUL DOGRA,Atul's bot,View Balance,0.0,ALLOW,R4,Registered and active AI agents can VIEW BALANCE without additional customer confirmation.
+REQ-1175,2026-11-17 21:51:36,Sneha Roy,Sneha Expense Manager,Transfer Money,3500.0,BLOCK,R1,Agent 'Sneha Expense Manager' has been permanently REVOKED on 2026-11-15 11:00:00 (Revoked by bank administrator due to suspicious activity). All requests from revoked agents must be BLOCKED.
