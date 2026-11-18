@@ -1,6 +1,6 @@
 """
-Configuration and UI Branding for ICICI Bank Agent Gatekeeper.
-Designed for MBA Academic Project.
+Configuration and Official ICICI Bank Brand Palette for Agent Gatekeeper.
+Designed for MBA Academic Project & Presentation.
 """
 
 # Student Project Information
@@ -9,15 +9,29 @@ ENROLMENT_NUMBER = "PGD202563436"
 PROJECT_TITLE = "AGENT GATEKEEPER"
 PROJECT_SUBTITLE = "An AI Agent Permission and Risk Management System for ICICI Bank"
 BANK_NAME = "ICICI Bank"
+BANK_TAGLINE = "Hum Hai Na, Khayal Aapka"
 
-# Corporate Brand Colors (Official ICICI Palette)
-COLOR_PRIMARY = "#B3282D"     # ICICI Maroon / Deep Red
-COLOR_SECONDARY = "#F58220"   # ICICI Corporate Orange
-COLOR_NAVY = "#0B2341"        # Corporate Navy
-COLOR_BG_LIGHT = "#F8F9FA"    # Soft Background Gray
-COLOR_SUCCESS = "#2E7D32"     # Emerald Green for ALLOW
-COLOR_WARNING = "#ED6C02"     # Amber Orange for ASK CUSTOMER
-COLOR_DANGER = "#D32F2F"      # Crimson Red for BLOCK
+# Official ICICI Bank Brand Color Palette
+ICICI_MAROON = "#8B1E22"       # Signature ICICI Deep Maroon / Crimson
+ICICI_MAROON_DARK = "#661417"  # Dark Burgundy for gradients
+ICICI_ORANGE = "#F58220"       # Official ICICI Corporate Orange
+ICICI_ORANGE_LIGHT = "#FFF3E8" # Soft Orange tint for highlight cards
+ICICI_GOLD = "#FDB813"         # Golden Yellow accent
+ICICI_NAVY = "#002B49"         # ICICI Corporate Deep Navy
+ICICI_BG = "#FDFBF7"           # Warm off-white / ivory banking canvas
+CARD_WHITE = "#FFFFFF"         # Card background
+TEXT_DARK = "#1E293B"          # High-contrast charcoal text
+TEXT_MUTED = "#64748B"         # Subdued slate for subtitles
+BORDER_COLOR = "#E2E8F0"       # Clean subtle border
+
+# Legacy / Universal Color Aliases
+COLOR_PRIMARY = ICICI_MAROON
+COLOR_SECONDARY = ICICI_ORANGE
+COLOR_NAVY = ICICI_NAVY
+COLOR_BG_LIGHT = ICICI_BG
+COLOR_SUCCESS = "#0A7E3E"      # ICICI Green for ALLOW
+COLOR_WARNING = "#D97706"      # ICICI Amber for ASK CUSTOMER
+COLOR_DANGER = "#DC2626"       # ICICI Crimson Red for BLOCK
 
 # Available Agent Actions
 ACTION_VIEW_BALANCE = "View Balance"

@@ -273,5 +273,192 @@
         "decision": "BLOCK",
         "rule_number": "R1",
         "explanation": "Agent 'Sneha Expense Manager' has been permanently REVOKED on 2026-11-15 11:00:00 (Revoked by bank administrator due to suspicious activity). All requests from revoked agents must be BLOCKED."
+    },
+    {
+        "request_id": "REQ-2047",
+        "timestamp": "2026-11-18 16:43:09",
+        "customer_name": "Test Customer",
+        "agent_name": "Test Agent",
+        "action": "Pay Bill",
+        "amount": 3500.0,
+        "decision": "ALLOW",
+        "rule_number": "R5",
+        "explanation": "Test automated verification"
+    },
+    {
+        "request_id": "REQ-7394",
+        "timestamp": "2026-11-18 16:43:21",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "action": "Agent Registration",
+        "amount": 0.0,
+        "decision": "ALLOW",
+        "rule_number": "REG",
+        "explanation": "New AI agent 'Aditya Investment Assistant' enrolled with ID AGT-1009. Permissions: View Balance=Yes, Pay Bills=Yes, Transfer Money=Yes."
+    },
+    {
+        "request_id": "REQ-3621",
+        "timestamp": "2026-11-18 16:43:21",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "action": "Pay Bill",
+        "amount": 4800.0,
+        "decision": "ALLOW",
+        "rule_number": "R5",
+        "explanation": "Registered and active agent with customer-granted bill-payment permission can PAY BILLS up to \u20b95,000 automatically (Requested: \u20b94,800.00)."
+    },
+    {
+        "request_id": "REQ-8934",
+        "timestamp": "2026-11-18 16:43:21",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "action": "Agent Revocation",
+        "amount": 0.0,
+        "decision": "BLOCK",
+        "rule_number": "R1",
+        "explanation": "Administrator revoked agent 'Aditya Investment Assistant' (AGT-1009). Revocation Timestamp: 2026-11-18 16:43:21. Reason: Customer lost device containing agent credentials."
+    },
+    {
+        "request_id": "REQ-2061",
+        "timestamp": "2026-11-18 16:43:38",
+        "customer_name": "Kavita Rao",
+        "agent_name": "Kavita Autonomous FinBot",
+        "action": "Agent Registration",
+        "amount": 0.0,
+        "decision": "ALLOW",
+        "rule_number": "REG",
+        "explanation": "New AI agent 'Kavita Autonomous FinBot' enrolled with ID AGT-1010. Permissions: View Balance=Yes, Pay Bills=Yes, Transfer Money=Yes."
+    },
+    {
+        "request_id": "REQ-4900",
+        "timestamp": "2026-11-18 16:43:38",
+        "customer_name": "Kavita Rao",
+        "agent_name": "Kavita Autonomous FinBot",
+        "action": "Pay Bill",
+        "amount": 3500.0,
+        "decision": "ALLOW",
+        "rule_number": "R5",
+        "explanation": "Registered and active agent with customer-granted bill-payment permission can PAY BILLS up to \u20b95,000 automatically (Requested: \u20b93,500.00)."
+    },
+    {
+        "request_id": "REQ-5672",
+        "timestamp": "2026-11-18 16:43:38",
+        "customer_name": "Kavita Rao",
+        "agent_name": "Kavita Autonomous FinBot",
+        "action": "Agent Revocation",
+        "amount": 0.0,
+        "decision": "BLOCK",
+        "rule_number": "R1",
+        "explanation": "Administrator revoked agent 'Kavita Autonomous FinBot' (AGT-1010). Revocation Timestamp: 2026-11-18 16:43:38. Reason: Security Audit: Compromised API key and anomalous frequency detected."
+    },
+    {
+        "request_id": "REQ-6811",
+        "timestamp": "2026-11-18 16:43:39",
+        "customer_name": "Kavita Rao",
+        "agent_name": "Kavita Autonomous FinBot",
+        "action": "Pay Bill",
+        "amount": 3500.0,
+        "decision": "BLOCK",
+        "rule_number": "R1",
+        "explanation": "Agent 'Kavita Autonomous FinBot' has been permanently REVOKED on 2026-11-17 20:49:41 (Security Audit: Compromised API key and anomalous frequency detected). All requests from revoked agents must be BLOCKED."
+    },
+    {
+        "request_id": "REQ-8585",
+        "timestamp": "2026-11-18 16:44:49",
+        "customer_name": "Test Customer",
+        "agent_name": "Test Agent",
+        "action": "Pay Bill",
+        "amount": 3500.0,
+        "decision": "ALLOW",
+        "rule_number": "R5",
+        "explanation": "Test automated verification"
+    },
+    {
+        "request_id": "REQ-2294",
+        "timestamp": "2026-11-18 17:00:21",
+        "customer_name": "Test Customer",
+        "agent_name": "Test Agent",
+        "action": "Pay Bill",
+        "amount": 3500.0,
+        "decision": "ALLOW",
+        "rule_number": "R5",
+        "explanation": "Test automated verification"
+    },
+    {
+        "request_id": "REQ-5573",
+        "timestamp": "2026-11-18 17:00:32",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "action": "Agent Registration",
+        "amount": 0.0,
+        "decision": "ALLOW",
+        "rule_number": "REG",
+        "explanation": "New AI agent 'Aditya Investment Assistant' enrolled with ID AGT-1011. Permissions: View Balance=Yes, Pay Bills=Yes, Transfer Money=Yes."
+    },
+    {
+        "request_id": "REQ-5260",
+        "timestamp": "2026-11-18 17:00:32",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "action": "Pay Bill",
+        "amount": 4800.0,
+        "decision": "ALLOW",
+        "rule_number": "R5",
+        "explanation": "Registered and active agent with customer-granted bill-payment permission can PAY BILLS up to \u20b95,000 automatically (Requested: \u20b94,800.00)."
+    },
+    {
+        "request_id": "REQ-9669",
+        "timestamp": "2026-11-18 17:00:32",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "action": "Agent Revocation",
+        "amount": 0.0,
+        "decision": "BLOCK",
+        "rule_number": "R1",
+        "explanation": "Administrator revoked agent 'Aditya Investment Assistant' (AGT-1011). Revocation Timestamp: 2026-11-18 17:00:32. Reason: Customer lost device containing agent credentials."
+    },
+    {
+        "request_id": "REQ-6910",
+        "timestamp": "2026-11-18 17:01:00",
+        "customer_name": "Kavita Rao",
+        "agent_name": "Kavita Autonomous FinBot",
+        "action": "Agent Registration",
+        "amount": 0.0,
+        "decision": "ALLOW",
+        "rule_number": "REG",
+        "explanation": "New AI agent 'Kavita Autonomous FinBot' enrolled with ID AGT-1012. Permissions: View Balance=Yes, Pay Bills=Yes, Transfer Money=Yes."
+    },
+    {
+        "request_id": "REQ-2474",
+        "timestamp": "2026-11-18 17:01:00",
+        "customer_name": "Kavita Rao",
+        "agent_name": "Kavita Autonomous FinBot",
+        "action": "Pay Bill",
+        "amount": 3500.0,
+        "decision": "ALLOW",
+        "rule_number": "R5",
+        "explanation": "Registered and active agent with customer-granted bill-payment permission can PAY BILLS up to \u20b95,000 automatically (Requested: \u20b93,500.00)."
+    },
+    {
+        "request_id": "REQ-1248",
+        "timestamp": "2026-11-18 17:01:00",
+        "customer_name": "Kavita Rao",
+        "agent_name": "Kavita Autonomous FinBot",
+        "action": "Agent Revocation",
+        "amount": 0.0,
+        "decision": "BLOCK",
+        "rule_number": "R1",
+        "explanation": "Administrator revoked agent 'Kavita Autonomous FinBot' (AGT-1012). Revocation Timestamp: 2026-11-18 17:01:00. Reason: Security Audit: Compromised API key and anomalous frequency detected."
+    },
+    {
+        "request_id": "REQ-9409",
+        "timestamp": "2026-11-18 17:01:00",
+        "customer_name": "Kavita Rao",
+        "agent_name": "Kavita Autonomous FinBot",
+        "action": "Pay Bill",
+        "amount": 3500.0,
+        "decision": "BLOCK",
+        "rule_number": "R1",
+        "explanation": "Agent 'Kavita Autonomous FinBot' has been permanently REVOKED on 2026-11-17 20:49:41 (Security Audit: Compromised API key and anomalous frequency detected). All requests from revoked agents must be BLOCKED."
     }
 ]

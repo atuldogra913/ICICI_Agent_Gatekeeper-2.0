@@ -1,10 +1,12 @@
 """
 AGENT GATEKEEPER: An AI Agent Permission and Risk Management System for ICICI Bank
-Professional Banking Dashboard UI for MBA Academic Project Presentation.
+Authentic ICICI Bank Corporate Design for MBA Academic Project & Presentation.
 """
 
 import sys
 import os
+import threading
+import time
 
 # Auto-runner guard: If user runs `python app.py` directly instead of `streamlit run app.py`,
 # automatically launch Streamlit web server so the website opens without errors!
@@ -13,17 +15,14 @@ try:
     if get_script_run_ctx() is None:
         import webbrowser
         from streamlit.web import cli as stcli
-        # Open browser automatically after 1 second
-        import threading
         def open_browser():
-            import time
             time.sleep(1.5)
             webbrowser.open_new_tab("http://localhost:8501")
         threading.Thread(target=open_browser, daemon=True).start()
         
-        sys.argv = ["streamlit", "run", __file__, "--server.port=8501"]
+        sys.argv = ["streamlit", "run", __file__, "--server.port=8501", "--browser.gatherUsageStats=false"]
         sys.exit(stcli.main())
-except Exception as e:
+except Exception:
     pass
 
 import streamlit as st
@@ -36,9 +35,15 @@ from config import (
     PROJECT_TITLE,
     PROJECT_SUBTITLE,
     BANK_NAME,
-    COLOR_PRIMARY,
-    COLOR_SECONDARY,
-    COLOR_NAVY,
+    BANK_TAGLINE,
+    ICICI_MAROON,
+    ICICI_ORANGE,
+    ICICI_NAVY,
+    ICICI_BG,
+    CARD_WHITE,
+    TEXT_DARK,
+    TEXT_MUTED,
+    BORDER_COLOR,
     ACTIONS,
     ACTION_VIEW_BALANCE,
     ACTION_PAY_BILL,
@@ -57,154 +62,215 @@ import decision_engine
 # Streamlit Page Configuration
 # -------------------------------------------------------------
 st.set_page_config(
-    page_title=f"{PROJECT_TITLE} | {BANK_NAME}",
-    page_icon="🛡️",
+    page_title=f"{BANK_NAME} | {PROJECT_TITLE}",
+    page_icon="🏦",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # -------------------------------------------------------------
-# High-End Corporate Banking CSS Styling
+# Authentic ICICI Bank Corporate Theme CSS
 # -------------------------------------------------------------
-NAVY_PRIMARY = "#0A2540"       # Deep Executive Navy
-NAVY_SECONDARY = "#002D62"     # ICICI Corporate Navy
-ACCENT_ORANGE = "#F58220"      # ICICI Brand Orange
-ACCENT_CRIMSON = "#B3282D"     # ICICI Burgundy / Red
-BG_CARD = "#FFFFFF"            # Clean Card White
-TEXT_DARK = "#0F172A"          # Slate 900
-TEXT_MUTED = "#64748B"         # Slate 500
-BORDER_LIGHT = "#E2E8F0"       # Slate 200
-
 CUSTOM_CSS = f"""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&display=swap');
     
     html, body, [class*="css"] {{
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
         color: {TEXT_DARK};
+        background-color: {ICICI_BG};
     }}
 
-    /* Global page padding */
     .block-container {{
-        padding-top: 1.2rem;
+        padding-top: 1.0rem;
         padding-bottom: 2.5rem;
-        max-width: 1300px;
+        max-width: 1320px;
     }}
 
-    /* Top ICICI Corporate Header Banner */
+    /* ICICI Dual-Tone Top Ribbon & Banner */
+    .icici-top-ribbon {{
+        height: 5px;
+        background: linear-gradient(90deg, {ICICI_ORANGE} 0%, #FFB81C 50%, {ICICI_ORANGE} 100%);
+        border-radius: 12px 12px 0 0;
+    }}
     .icici-top-banner {{
-        background: linear-gradient(135deg, {NAVY_PRIMARY} 0%, {NAVY_SECONDARY} 65%, #0B3C78 100%);
-        border-bottom: 4px solid {ACCENT_ORANGE};
-        border-radius: 12px;
-        padding: 24px 32px;
+        background: linear-gradient(135deg, #701115 0%, {ICICI_MAROON} 45%, #9E1C21 100%);
+        border-radius: 0 0 12px 12px;
+        padding: 22px 30px;
         color: white;
-        margin-bottom: 24px;
-        box-shadow: 0 10px 25px -5px rgba(10, 37, 64, 0.2), 0 8px 10px -6px rgba(10, 37, 64, 0.1);
+        margin-bottom: 20px;
+        box-shadow: 0 10px 25px -5px rgba(139, 30, 34, 0.25);
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
         gap: 16px;
     }}
-    .banner-brand-section {{
+    .brand-group {{
         display: flex;
         align-items: center;
         gap: 18px;
     }}
-    .bank-logo-badge {{
-        background: white;
-        color: {ACCENT_CRIMSON};
-        font-weight: 800;
-        font-size: 22px;
-        padding: 10px 16px;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    /* The Iconic ICICI "i" Circular Emblem */
+    .icici-emblem {{
+        width: 50px;
+        height: 50px;
+        background: radial-gradient(circle at 35% 35%, #FFA84D 0%, {ICICI_ORANGE} 70%, #D46200 100%);
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        letter-spacing: -0.5px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        color: white;
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        font-weight: 600;
+        font-style: italic;
+        line-height: 1;
+        user-select: none;
     }}
-    .banner-title-text {{
-        font-size: 24px;
+    .brand-title-wrap {{
+        display: flex;
+        flex-direction: column;
+    }}
+    .bank-name-row {{
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+    }}
+    .icici-wordmark {{
+        font-size: 26px;
         font-weight: 800;
-        letter-spacing: -0.02em;
-        margin: 0;
-        line-height: 1.2;
+        letter-spacing: -0.5px;
+        color: #FFFFFF;
+        line-height: 1.1;
     }}
-    .banner-sub-text {{
+    .icici-wordmark span {{
+        color: {ICICI_ORANGE};
+        margin-left: 2px;
+    }}
+    .icici-tagline {{
+        font-size: 12px;
+        font-style: italic;
+        color: #FBD5B5;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+    }}
+    .project-header-text {{
         font-size: 13px;
-        color: #94A3B8;
+        color: #F8D7DA;
         margin-top: 4px;
         font-weight: 400;
+        display: flex;
+        align-items: center;
+        gap: 6px;
     }}
+    
+    /* Academic Profile Card in Header */
     .banner-author-badge {{
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        backdrop-filter: blur(8px);
-        padding: 12px 20px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(10px);
+        padding: 10px 18px;
         border-radius: 10px;
         text-align: right;
-        min-width: 220px;
+        min-width: 230px;
     }}
     .banner-author-badge .sub {{
-        font-size: 11px;
+        font-size: 10px;
         text-transform: uppercase;
         letter-spacing: 1px;
-        color: {ACCENT_ORANGE};
+        color: #FFC48C;
         font-weight: 700;
     }}
     .banner-author-badge .name {{
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 700;
         color: #FFFFFF;
-        margin-top: 2px;
+        margin-top: 1px;
     }}
     .banner-author-badge .enrol {{
+        display: inline-block;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 3px 8px;
+        border-radius: 4px;
+        border-left: 3px solid {ICICI_ORANGE};
         font-size: 12px;
-        color: #CBD5E1;
+        font-weight: 700;
+        color: #FFFFFF;
         font-family: monospace;
-        margin-top: 2px;
+        margin-top: 4px;
     }}
 
-    /* Executive KPI Cards */
-    .metric-card {{
-        background: {BG_CARD};
+    /* Sub-header Quick Status Ribbon */
+    .icici-subnav-ribbon {{
+        background: #FFFFFF;
+        border: 1px solid {BORDER_COLOR};
+        border-radius: 8px;
+        padding: 10px 16px;
+        margin-bottom: 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        color: #475569;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }}
+    .subnav-item {{
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 500;
+    }}
+    .subnav-badge {{
+        background: #E0F2FE;
+        color: #0369A1;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 2px 8px;
         border-radius: 12px;
-        border: 1px solid {BORDER_LIGHT};
-        padding: 20px 22px;
-        box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+    }}
+
+    /* ICICI Style KPI Cards */
+    .metric-card {{
+        background: {CARD_WHITE};
+        border-radius: 10px;
+        border: 1px solid {BORDER_COLOR};
+        padding: 18px 20px;
+        box-shadow: 0 2px 8px rgba(139, 30, 34, 0.05);
         position: relative;
         overflow: hidden;
         transition: transform 0.15s ease, box-shadow 0.15s ease;
     }}
     .metric-card:hover {{
         transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.08);
+        box-shadow: 0 8px 16px rgba(139, 30, 34, 0.09);
     }}
     .metric-card-top {{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }}
     .metric-label {{
-        font-size: 12px;
-        font-weight: 600;
+        font-size: 11px;
+        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.06em;
         color: {TEXT_MUTED};
     }}
     .metric-icon {{
-        font-size: 18px;
-        width: 34px;
-        height: 34px;
+        font-size: 16px;
+        width: 32px;
+        height: 32px;
         border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
     }}
     .metric-value {{
-        font-size: 32px;
+        font-size: 30px;
         font-weight: 800;
         letter-spacing: -0.03em;
         color: {TEXT_DARK};
@@ -219,41 +285,32 @@ CUSTOM_CSS = f"""
         gap: 5px;
     }}
 
-    /* Card Top Accent Bars */
-    .accent-bar-navy {{ border-top: 4px solid {NAVY_SECONDARY}; }}
-    .accent-bar-green {{ border-top: 4px solid #059669; }}
-    .accent-bar-amber {{ border-top: 4px solid #D97706; }}
-    .accent-bar-red {{ border-top: 4px solid #DC2626; }}
-    .accent-bar-orange {{ border-top: 4px solid {ACCENT_ORANGE}; }}
+    /* ICICI Card Accent Bars */
+    .accent-bar-maroon {{ border-top: 4px solid {ICICI_MAROON}; }}
+    .accent-bar-orange {{ border-top: 4px solid {ICICI_ORANGE}; }}
+    .accent-bar-green  {{ border-top: 4px solid #0A7E3E; }}
+    .accent-bar-amber  {{ border-top: 4px solid #D97706; }}
+    .accent-bar-red    {{ border-top: 4px solid #DC2626; }}
 
     /* Section Subheadings */
     .section-title {{
-        font-size: 16px;
-        font-weight: 700;
-        color: {NAVY_PRIMARY};
+        font-size: 15px;
+        font-weight: 800;
+        color: {ICICI_MAROON};
         letter-spacing: -0.01em;
-        margin: 20px 0 12px 0;
+        margin: 18px 0 10px 0;
         display: flex;
         align-items: center;
         gap: 8px;
-    }}
-
-    /* Form Container Card */
-    .content-box {{
-        background: {BG_CARD};
-        border: 1px solid {BORDER_LIGHT};
-        border-radius: 12px;
-        padding: 24px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-        margin-bottom: 20px;
+        text-transform: uppercase;
     }}
 
     /* Verdict Display Cards */
     .verdict-box {{
-        border-radius: 12px;
-        padding: 24px;
-        margin-top: 10px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+        padding: 22px;
+        margin-top: 8px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
     }}
     .verdict-allow {{
         background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
@@ -262,23 +319,22 @@ CUSTOM_CSS = f"""
     }}
     .verdict-ask {{
         background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
-        border: 2px solid #D97706;
-        color: #78350F;
+        border: 2px solid {ICICI_ORANGE};
+        color: #7C2D12;
     }}
     .verdict-block {{
         background: linear-gradient(135deg, #FEF2F2 0%, #FEE2E2 100%);
-        border: 2px solid #DC2626;
+        border: 2px solid {ICICI_MAROON};
         color: #7F1D1D;
     }}
-
     .verdict-header {{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }}
     .verdict-title {{
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 800;
         margin: 0;
         letter-spacing: -0.01em;
@@ -292,31 +348,30 @@ CUSTOM_CSS = f"""
         letter-spacing: 0.05em;
     }}
     .badge-allow {{ background: #16A34A; color: white; }}
-    .badge-ask {{ background: #D97706; color: white; }}
-    .badge-block {{ background: #DC2626; color: white; }}
+    .badge-ask {{ background: {ICICI_ORANGE}; color: white; }}
+    .badge-block {{ background: {ICICI_MAROON}; color: white; }}
 
-    /* Sidebar Refinement */
+    /* Streamlit Button Styling (ICICI Orange) */
+    .stButton>button {{
+        background: linear-gradient(135deg, {ICICI_ORANGE} 0%, #E06D0C 100%) !important;
+        color: white !important;
+        font-weight: 700 !important;
+        border: none !important;
+        border-radius: 6px !important;
+        padding: 8px 18px !important;
+        box-shadow: 0 2px 6px rgba(245, 130, 32, 0.3) !important;
+        transition: all 0.15s ease !important;
+    }}
+    .stButton>button:hover {{
+        background: linear-gradient(135deg, #E06D0C 0%, #C45B00 100%) !important;
+        box-shadow: 0 4px 10px rgba(245, 130, 32, 0.45) !important;
+        transform: translateY(-1px) !important;
+    }}
+
+    /* Sidebar Styling */
     [data-testid="stSidebar"] {{
-        background-color: #F8FAFC;
-        border-right: 1px solid #E2E8F0;
-    }}
-
-    /* Status Pill Badges */
-    .status-pill-active {{
-        background: #DCFCE7;
-        color: #15803D;
-        font-size: 11px;
-        font-weight: 700;
-        padding: 3px 8px;
-        border-radius: 12px;
-    }}
-    .status-pill-revoked {{
-        background: #FEE2E2;
-        color: #B91C1C;
-        font-size: 11px;
-        font-weight: 700;
-        padding: 3px 8px;
-        border-radius: 12px;
+        background-color: #FAF8F5;
+        border-right: 1px solid #E5E1DA;
     }}
 </style>
 """
@@ -326,22 +381,37 @@ st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 storage.ensure_data_directory()
 
 # -------------------------------------------------------------
-# Sidebar: Navigation & Student Profile
+# Enrolment Number Strict Resolution
+# -------------------------------------------------------------
+if st.session_state.get("enrolment_no") in [None, "", "MBA-2024-ICICI-001", "[INSERT YOUR ACTUAL ENROLMENT NUMBER]"]:
+    st.session_state["enrolment_no"] = ENROLMENT_NUMBER
+
+# -------------------------------------------------------------
+# Sidebar: ICICI Bank Governance Console
 # -------------------------------------------------------------
 with st.sidebar:
     st.markdown(
         f"""
-        <div style="padding: 10px 0 16px 0; text-align: center;">
-            <div style="font-size: 30px; margin-bottom: 4px;">🏦</div>
-            <div style="font-weight: 800; color: {NAVY_PRIMARY}; font-size: 19px; letter-spacing: -0.5px;">ICICI BANK</div>
-            <div style="font-size: 11px; font-weight: 600; color: {TEXT_MUTED}; text-transform: uppercase; letter-spacing: 1px;">AI Risk & Governance Office</div>
+        <div style="padding: 10px 0 14px 0; text-align: center;">
+            <div style="display: flex; justify-content: center; margin-bottom: 8px;">
+                <div class="icici-emblem" style="width: 44px; height: 44px; font-size: 28px;">i</div>
+            </div>
+            <div style="font-weight: 800; color: {ICICI_MAROON}; font-size: 20px; letter-spacing: -0.5px;">
+                ICICI <span style="color: {ICICI_ORANGE};">Bank</span>
+            </div>
+            <div style="font-size: 11px; font-style: italic; color: #8C5320; margin-top: 1px;">
+                {BANK_TAGLINE}
+            </div>
+            <div style="font-size: 10px; font-weight: 700; color: {TEXT_MUTED}; text-transform: uppercase; letter-spacing: 0.8px; margin-top: 6px;">
+                AI Agent Permission & Risk Gateway
+            </div>
         </div>
         """,
         unsafe_allow_html=True
     )
     st.divider()
 
-    st.markdown("<p style='font-size: 11px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;'>Control Center</p>", unsafe_allow_html=True)
+    st.markdown("<p style='font-size: 11px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;'>Navigation Portal</p>", unsafe_allow_html=True)
     menu = st.radio(
         "Navigation",
         [
@@ -356,21 +426,17 @@ with st.sidebar:
     )
 
     st.divider()
-    st.markdown("<p style='font-size: 11px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;'>🎓 Academic Project Profile</p>", unsafe_allow_html=True)
-
-    # Ensure any cached old placeholder or old default is cleared to user's actual enrolment number
-    if st.session_state.get("enrolment_no") in [None, "", "MBA-2024-ICICI-001", "[INSERT YOUR ACTUAL ENROLMENT NUMBER]"]:
-        st.session_state["enrolment_no"] = "PGD202563436"
+    st.markdown("<p style='font-size: 11px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;'>🎓 Candidate Academic Profile</p>", unsafe_allow_html=True)
 
     enrolment_val = st.text_input(
         "Enrolment Number",
-        value=st.session_state.get("enrolment_no", "PGD202563436"),
+        value=st.session_state.get("enrolment_no", ENROLMENT_NUMBER),
         help="Official MBA Candidate Enrolment ID"
     )
     if enrolment_val and enrolment_val != "MBA-2024-ICICI-001":
         st.session_state["enrolment_no"] = enrolment_val
     else:
-        st.session_state["enrolment_no"] = "PGD202563436"
+        st.session_state["enrolment_no"] = ENROLMENT_NUMBER
 
     candidate_val = st.text_input(
         "Candidate Name",
@@ -380,11 +446,15 @@ with st.sidebar:
 
     st.markdown(
         f"""
-        <div style="background: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px; font-size: 12px; color: #334155; margin-top: 12px;">
-            <div style="font-weight: 700; color: {NAVY_PRIMARY};">MBA Capstone Project</div>
+        <div style="background: white; border: 1px solid #E5E1DA; border-radius: 8px; padding: 12px; font-size: 12px; color: #334155; margin-top: 12px;">
+            <div style="font-weight: 700; color: {ICICI_MAROON};">MBA Capstone Project</div>
             <div style="color: #64748B; margin-top: 2px;">Banking & Financial Technology</div>
             <hr style="border: 0; border-top: 1px solid #F1F5F9; margin: 8px 0;">
             <div style="display: flex; justify-content: space-between; font-size: 11px;">
+                <span style="color: #64748B;">Enrolment ID:</span>
+                <span style="font-weight: 700; color: {ICICI_MAROON};">{st.session_state['enrolment_no']}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 11px; margin-top: 4px;">
                 <span style="color: #64748B;">Decision Engine:</span>
                 <span style="font-weight: 700; color: #16A34A;">Online (R1-R8)</span>
             </div>
@@ -394,28 +464,58 @@ with st.sidebar:
     )
 
 # -------------------------------------------------------------
-# Top Banner: ICICI Bank Branding & Enrolment Display
+# Top Banner: Authentic ICICI Bank Header
 # -------------------------------------------------------------
-current_enrolment = st.session_state.get("enrolment_no", "PGD202563436")
+current_enrolment = st.session_state.get("enrolment_no", ENROLMENT_NUMBER)
 if current_enrolment in ["MBA-2024-ICICI-001", "[INSERT YOUR ACTUAL ENROLMENT NUMBER]"]:
-    current_enrolment = "PGD202563436"
+    current_enrolment = ENROLMENT_NUMBER
 
 current_candidate = st.session_state.get("student_name", STUDENT_NAME)
 
 st.markdown(
     f"""
+    <div class="icici-top-ribbon"></div>
     <div class="icici-top-banner">
-        <div class="banner-brand-section">
-            <div class="bank-logo-badge">ICICI</div>
-            <div>
-                <h1 class="banner-title-text">{PROJECT_TITLE}</h1>
-                <div class="banner-sub-text">{PROJECT_SUBTITLE}</div>
+        <div class="brand-group">
+            <div class="icici-emblem">i</div>
+            <div class="brand-title-wrap">
+                <div class="bank-name-row">
+                    <span class="icici-wordmark">ICICI<span>Bank</span></span>
+                    <span class="icici-tagline">| {BANK_TAGLINE}</span>
+                </div>
+                <div style="font-size: 21px; font-weight: 800; letter-spacing: -0.02em; margin-top: 2px; color: #FFFFFF;">
+                    {PROJECT_TITLE}
+                </div>
+                <div class="project-header-text">
+                    <span>🛡️ AI Agent Permission & Risk Management System</span>
+                </div>
             </div>
         </div>
         <div class="banner-author-badge">
             <div class="sub">MBA Presentation Profile</div>
             <div class="name">{current_candidate}</div>
             <div class="enrol">Enrolment: {current_enrolment}</div>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# ICICI Sub-Navigation Ribbon
+st.markdown(
+    f"""
+    <div class="icici-subnav-ribbon">
+        <div class="subnav-item">
+            <span>🏛️</span>
+            <span><b>Relationship:</b> ICICI Retail & Corporate AI Banking Gateway</span>
+        </div>
+        <div class="subnav-item">
+            <span>🔒</span>
+            <span><b>Security Protocol:</b> 256-Bit SSL Encrypted Sandbox</span>
+        </div>
+        <div class="subnav-item">
+            <span class="subnav-badge">RBI Compliant</span>
+            <span>Candidate ID: <b>{current_enrolment}</b></span>
         </div>
     </div>
     """,
@@ -435,10 +535,10 @@ if menu == "📊 Executive Dashboard":
     with c1:
         st.markdown(
             f"""
-            <div class="metric-card accent-bar-navy">
+            <div class="metric-card accent-bar-maroon">
                 <div class="metric-card-top">
                     <span class="metric-label">Total Registered Agents</span>
-                    <span class="metric-icon" style="background: #EFF6FF; color: {NAVY_SECONDARY};">📋</span>
+                    <span class="metric-icon" style="background: #FDF2E9; color: {ICICI_MAROON};">📋</span>
                 </div>
                 <div class="metric-value">{metrics['total_agents']}</div>
                 <div class="metric-footer">Total authorized & cataloged agents</div>
@@ -476,7 +576,7 @@ if menu == "📊 Executive Dashboard":
         )
 
     # Section 2: Request Decision Statistics
-    st.markdown('<div class="section-title"><span>🛡️</span> Request Evaluation Telemetry & Statistics</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title"><span>🛡️</span> Autonomous Request Telemetry & Statistics</div>', unsafe_allow_html=True)
     r1, r2, r3, r4 = st.columns(4)
 
     total_req = metrics['total_requests']
@@ -487,10 +587,10 @@ if menu == "📊 Executive Dashboard":
     with r1:
         st.markdown(
             f"""
-            <div class="metric-card accent-bar-navy">
+            <div class="metric-card accent-bar-maroon">
                 <div class="metric-card-top">
                     <span class="metric-label">Total Requests</span>
-                    <span class="metric-icon" style="background: #F1F5F9; color: #334155;">⚡</span>
+                    <span class="metric-icon" style="background: #F8F9FA; color: {ICICI_MAROON};">⚡</span>
                 </div>
                 <div class="metric-value">{total_req}</div>
                 <div class="metric-footer">Audited under Rule R8</div>
@@ -507,7 +607,7 @@ if menu == "📊 Executive Dashboard":
                     <span class="metric-icon" style="background: #DCFCE7; color: #15803D;">✓</span>
                 </div>
                 <div class="metric-value" style="color: #15803D;">{metrics['allowed_requests']}</div>
-                <div class="metric-footer">{allow_pct}% of total requests</div>
+                <div class="metric-footer">{allow_pct}% frictionless transactions</div>
             </div>
             """,
             unsafe_allow_html=True
@@ -515,12 +615,12 @@ if menu == "📊 Executive Dashboard":
     with r3:
         st.markdown(
             f"""
-            <div class="metric-card accent-bar-amber">
+            <div class="metric-card accent-bar-orange">
                 <div class="metric-card-top">
                     <span class="metric-label">ASK CUSTOMER</span>
-                    <span class="metric-icon" style="background: #FEF3C7; color: #D97706;">?</span>
+                    <span class="metric-icon" style="background: #FEF3C7; color: {ICICI_ORANGE};">?</span>
                 </div>
-                <div class="metric-value" style="color: #D97706;">{metrics['pending_requests']}</div>
+                <div class="metric-value" style="color: {ICICI_ORANGE};">{metrics['pending_requests']}</div>
                 <div class="metric-footer">{pending_pct}% step-up approval required</div>
             </div>
             """,
@@ -547,21 +647,21 @@ if menu == "📊 Executive Dashboard":
     ch_col, tbl_col = st.columns([1, 1], gap="medium")
 
     with ch_col:
-        st.markdown('<div class="section-title"><span>📈</span> Decision Distribution (Telemetry)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title"><span>📈</span> Decision Telemetry Distribution</div>', unsafe_allow_html=True)
         chart_df = pd.DataFrame({
             "Verdict": ["ALLOW", "ASK CUSTOMER", "BLOCK"],
             "Count": [metrics['allowed_requests'], metrics['pending_requests'], metrics['blocked_requests']]
         })
-        st.bar_chart(chart_df.set_index("Verdict"), color="#002D62", height=280)
+        st.bar_chart(chart_df.set_index("Verdict"), color=ICICI_MAROON, height=280)
 
     with tbl_col:
-        st.markdown('<div class="section-title"><span>⏱️</span> Recent Audit Ledger (Rule R8)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title"><span>⏱️</span> Recent Audit Events (Rule R8)</div>', unsafe_allow_html=True)
         recent_logs = storage.load_audit_log()
         if recent_logs:
             df_display = pd.DataFrame(recent_logs).head(5)
             st.dataframe(
                 df_display[["timestamp", "customer_name", "action", "amount", "decision", "rule_number"]],
-                use_container_width=True,
+                width="stretch",
                 hide_index=True
             )
         else:
@@ -571,8 +671,8 @@ if menu == "📊 Executive Dashboard":
 # PAGE 2: REQUEST EVALUATION
 # =============================================================
 elif menu == "⚡ Request Evaluation":
-    st.markdown('<div class="section-title"><span>⚡</span> Agent Request Evaluation Console</div>', unsafe_allow_html=True)
-    st.caption("Receive and evaluate transaction requests dispatched by personal AI agents against Banking Rules R1 to R8.")
+    st.markdown('<div class="section-title"><span>⚡</span> Autonomous Transaction Evaluation Console</div>', unsafe_allow_html=True)
+    st.caption("Inspect and evaluate transaction requests dispatched by personal AI agents against ICICI Bank Rules R1 to R8.")
 
     agents = storage.load_agents()
     agent_options = [a["agent_name"] for a in agents]
@@ -597,12 +697,12 @@ elif menu == "⚡ Request Evaluation":
                     help="Name of account holder"
                 )
                 if agent_obj:
-                    perms = agent_obj.get("permissions", {})
+                    perms = agent_obj.get("permissions") or {}
                     st.caption(
-                        f"🔒 **Customer-Granted Permissions:** "
-                        f"View Balance: {'✅' if perms.get('view_balance') else '❌'} | "
+                        f"🔒 **Registered Customer Permissions:** "
+                        f"View Balance: {'✅' if perms.get('view_balance', True) else '❌'} | "
                         f"Pay Bills: {'✅' if perms.get('pay_bills') else '❌'} | "
-                        f"Transfer Money: {'✅' if perms.get('transfer_money') else '❌'}"
+                        f"Transfer Money: {'✅' if perms.get('transfer_money', True) else '❌'}"
                     )
             else:
                 customer_name = st.text_input("Customer Name", placeholder="e.g., Rajesh Khanna")
@@ -628,7 +728,7 @@ elif menu == "⚡ Request Evaluation":
                     help="Tip: Enter negative to test R3, <= ₹5,000 to test R5, or > ₹5,000 to test R6."
                 )
 
-            submit_eval = st.form_submit_button("🛡️ Evaluate Request Through Gatekeeper", type="primary", use_container_width=True)
+            submit_eval = st.form_submit_button("🛡️ Evaluate Request Through Gatekeeper", width="stretch")
 
     with col_out:
         st.markdown("##### 📋 Gatekeeper Decision & Rationale")
@@ -650,7 +750,7 @@ elif menu == "⚡ Request Evaluation":
                 amount=amount,
                 decision=result.decision,
                 rule_number=result.rule_number,
-                reason=result.reason
+                explanation=result.explanation
             )
 
             # Render styled verdict card
@@ -697,10 +797,10 @@ elif menu == "⚡ Request Evaluation":
             st.markdown(
                 f"""
                 <div style="background: white; border: 1px solid #E2E8F0; border-radius: 10px; padding: 16px; margin-top: 14px; font-size: 13px;">
-                    <div style="font-weight: 700; color: {NAVY_PRIMARY}; margin-bottom: 6px;">Evaluation Audit Trail (Rule R8):</div>
+                    <div style="font-weight: 700; color: {ICICI_MAROON}; margin-bottom: 6px;">Evaluation Audit Trail (Rule R8):</div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; color: #475569;">
                         <div><b>Timestamp:</b> {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</div>
-                        <div><b>Decision:</b> {result.decision}</div>
+                        <div><b>Decision:</b> <b>{result.decision}</b></div>
                         <div><b>Customer:</b> {customer_name}</div>
                         <div><b>Rule Code:</b> {result.rule_number}</div>
                         <div><b>Agent:</b> {chosen_agent}</div>
@@ -712,13 +812,13 @@ elif menu == "⚡ Request Evaluation":
                 unsafe_allow_html=True
             )
         else:
-            st.info("👈 Enter transaction parameters on the left and click 'Evaluate Request Through Gatekeeper' to trigger rule evaluation.")
+            st.info("👈 Enter transaction parameters on the left and click 'Evaluate Request Through Gatekeeper' to trigger policy evaluation.")
 
 # =============================================================
 # PAGE 3: AGENT REGISTRATION
 # =============================================================
 elif menu == "📝 Agent Registration":
-    st.markdown('<div class="section-title"><span>📝</span> Customer AI Agent Registration</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title"><span>📝</span> Customer AI Agent Enrollment (Service Request)</div>', unsafe_allow_html=True)
     st.caption("Enroll a customer's personal AI agent into ICICI Bank's trusted identity registry and assign granular permissions.")
 
     reg_col1, reg_col2 = st.columns([1, 1], gap="large")
@@ -738,7 +838,7 @@ elif menu == "📝 Agent Registration":
             p_pay = st.checkbox("Grant 'Pay Bills' Permission (Required for R5)", value=True, help="If unchecked, bill payments will be BLOCKED under Rule R5")
             p_transfer = st.checkbox("Grant 'Transfer Money' Permission (Subject to R7)", value=True)
 
-            reg_submit = st.form_submit_button("✅ Register AI Agent", type="primary", use_container_width=True)
+            reg_submit = st.form_submit_button("✅ Register AI Agent", width="stretch")
 
             if reg_submit:
                 if not c_name.strip() or not a_name.strip():
@@ -763,7 +863,7 @@ elif menu == "📝 Agent Registration":
         if agents_list:
             rows = []
             for a in agents_list:
-                p = a.get("permissions", {})
+                p = a.get("permissions") or {}
                 rows.append({
                     "Agent ID": a.get("agent_id"),
                     "Customer": a.get("customer_name"),
@@ -773,7 +873,7 @@ elif menu == "📝 Agent Registration":
                     "Revoked On": a.get("revoked_at") if a.get("revoked_at") else "—",
                     "Bill Pay Perm": "Yes" if p.get("pay_bills") else "No"
                 })
-            st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
         else:
             st.info("No agents registered yet.")
 
@@ -781,7 +881,7 @@ elif menu == "📝 Agent Registration":
 # PAGE 4: AGENT REVOCATION
 # =============================================================
 elif menu == "🛡️ Agent Revocation":
-    st.markdown('<div class="section-title"><span>🛡️</span> Administrative Agent Revocation Console</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title"><span>🛡️</span> Administrative Safety Freeze & Revocation</div>', unsafe_allow_html=True)
     st.caption("Terminate an AI agent's operational permissions permanently. Under Rule R1, revoked agents are blocked from all future requests.")
 
     agents = storage.load_agents()
@@ -801,7 +901,7 @@ elif menu == "🛡️ Agent Revocation":
                 )
 
                 st.warning("⚠️ Warning: Revocation is irreversible. Under Rule R1, all subsequent requests from this agent will be permanently BLOCKED.")
-                revoke_submit = st.form_submit_button("🛑 Permanently Revoke Agent", type="primary", use_container_width=True)
+                revoke_submit = st.form_submit_button("🛑 Permanently Revoke Agent", width="stretch")
 
                 if revoke_submit:
                     target_id = agent_dict[selected_label]
@@ -821,13 +921,13 @@ elif menu == "🛡️ Agent Revocation":
             df_revoked = pd.DataFrame(revoked_agents)
             st.dataframe(
                 df_revoked[["agent_id", "customer_name", "agent_name", "status", "revoked_at", "revocation_reason"]],
-                use_container_width=True,
+                width="stretch",
                 hide_index=True
             )
         else:
             st.success("No agents are currently revoked.")
 
-    # Full Fleet Status Table showing all agents, status, and revocation timestamps
+    # Full Fleet Status Table
     st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
     st.markdown('<div class="section-title"><span>📋</span> Comprehensive Agent Fleet Status & Revocation Audit</div>', unsafe_allow_html=True)
     if agents:
@@ -842,7 +942,7 @@ elif menu == "🛡️ Agent Revocation":
                 "Revocation Timestamp": a.get("revoked_at") if a.get("revoked_at") else "—",
                 "Revocation Reason": a.get("revocation_reason") if a.get("revocation_reason") else "—"
             })
-        st.dataframe(pd.DataFrame(fleet_data), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(fleet_data), width="stretch", hide_index=True)
 
 # =============================================================
 # PAGE 5: AUDIT LOG
@@ -874,7 +974,7 @@ elif menu == "📜 Audit Log":
 
         st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
-        # Comprehensive Filters
+        # Filters
         f1, f2, f3 = st.columns(3)
         with f1:
             filter_decision = st.multiselect("Filter by Decision", [DECISION_ALLOW, DECISION_ASK_CUSTOMER, DECISION_BLOCK], default=[])
@@ -897,11 +997,10 @@ elif menu == "📜 Audit Log":
                 filtered["explanation"].str.lower().str.contains(q)
             ]
 
-        # Format readable display dataframe with the 8 required columns
+        # Format readable display dataframe
         display_df = filtered.copy()
         display_df["formatted_amount"] = display_df["amount"].apply(lambda x: f"₹{x:,.2f}" if float(x) > 0 else "—")
 
-        # Map to user-friendly column names
         readable_table = display_df[[
             "timestamp",
             "customer_name",
@@ -924,7 +1023,7 @@ elif menu == "📜 Audit Log":
 
         st.dataframe(
             readable_table,
-            use_container_width=True,
+            width="stretch",
             hide_index=True
         )
 
@@ -939,7 +1038,7 @@ elif menu == "📜 Audit Log":
                 data=csv_bytes,
                 file_name=f"ICICI_Gatekeeper_Audit_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
                 mime="text/csv",
-                use_container_width=True
+                width="stretch"
             )
         with d2:
             json_bytes = filtered.to_json(orient="records", indent=4)
@@ -948,7 +1047,7 @@ elif menu == "📜 Audit Log":
                 data=json_bytes,
                 file_name=f"ICICI_Gatekeeper_Audit_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
                 mime="application/json",
-                use_container_width=True
+                width="stretch"
             )
     else:
         st.info("The security audit log is currently empty.")
@@ -957,7 +1056,7 @@ elif menu == "📜 Audit Log":
 # PAGE 6: GOVERNANCE RULES MATRIX (R1-R8)
 # =============================================================
 elif menu == "📚 Governance Rules (R1-R8)":
-    st.markdown('<div class="section-title"><span>📚</span> Banking Risk Rules Matrix (R1 through R8)</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title"><span>📚</span> ICICI Bank AI Risk & Governance Matrix (R1 through R8)</div>', unsafe_allow_html=True)
     st.caption("Official specification of the 8 business rules implemented in the ICICI Agent Gatekeeper decision engine.")
 
     rules_table = [
