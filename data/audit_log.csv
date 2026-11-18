@@ -61,3 +61,4 @@ REQ-6457,2026-11-18 19:51:25,Rohan Sharma,Rohan Personal Assistant,Pay Bill,2000
 REQ-6229,2026-11-18 19:51:25,Sneha Roy,Sneha Expense Manager,View Balance,0.0,BLOCK,R1,Agent 'Sneha Expense Manager' has been permanently REVOKED on 2026-11-15 11:00:00 (Revoked by bank administrator due to suspicious transaction pattern). All requests from revoked agents must be BLOCKED.
 REQ-3273,2026-11-18 19:51:25,Rohan Sharma,Rohan Personal Assistant,Transfer Money,1500.0,ASK CUSTOMER,R7,"Every TRANSFER MONEY request must return ASK CUSTOMER, regardless of the amount (Requested: ₹1,500.00)."
 REQ-9121,2026-11-18 19:51:35,Test Customer,Test Agent,Pay Bill,3500.0,ALLOW,R5,Test automated verification
+REQ-4688,2026-11-18 22:42:59,asif,Asif bot,Agent Registration,0.0,ALLOW,REG,"New AI agent 'Asif bot' enrolled with ID AGT-1015. Permissions: View Balance=Yes, Pay Bills=Yes, Transfer Money=Yes."

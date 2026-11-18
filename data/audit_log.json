@@ -680,5 +680,16 @@
         "decision": "ALLOW",
         "rule_number": "R5",
         "explanation": "Test automated verification"
+    },
+    {
+        "request_id": "REQ-4688",
+        "timestamp": "2026-11-18 22:42:59",
+        "customer_name": "asif",
+        "agent_name": "Asif bot",
+        "action": "Agent Registration",
+        "amount": 0.0,
+        "decision": "ALLOW",
+        "rule_number": "REG",
+        "explanation": "New AI agent 'Asif bot' enrolled with ID AGT-1015. Permissions: View Balance=Yes, Pay Bills=Yes, Transfer Money=Yes."
     }
 ]

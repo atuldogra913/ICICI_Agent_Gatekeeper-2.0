@@ -194,5 +194,19 @@
         },
         "revoked_at": null,
         "revocation_reason": null
+    },
+    {
+        "agent_id": "AGT-1015",
+        "customer_name": "asif",
+        "agent_name": "Asif bot",
+        "registration_date": "2026-11-18 22:42:59",
+        "status": "ACTIVE",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": null,
+        "revocation_reason": null
     }
 ]
