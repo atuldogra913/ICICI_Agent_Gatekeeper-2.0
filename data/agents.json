@@ -166,5 +166,19 @@
         },
         "revoked_at": "2026-11-18 10:15:00",
         "revocation_reason": "Administrative freeze: Attempted unauthorized high-frequency automated transactions"
+    },
+    {
+        "agent_id": "AGT-1013",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "registration_date": "2026-11-18 17:06:30",
+        "status": "REVOKED",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": "2026-11-18 17:06:30",
+        "revocation_reason": "Customer lost device containing agent credentials"
     }
 ]

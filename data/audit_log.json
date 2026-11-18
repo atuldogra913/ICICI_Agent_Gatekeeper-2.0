@@ -460,5 +460,60 @@
         "decision": "BLOCK",
         "rule_number": "R1",
         "explanation": "Agent 'Kavita Autonomous FinBot' has been permanently REVOKED on 2026-11-17 20:49:41 (Security Audit: Compromised API key and anomalous frequency detected). All requests from revoked agents must be BLOCKED."
+    },
+    {
+        "request_id": "REQ-8716",
+        "timestamp": "2026-11-18 17:06:18",
+        "customer_name": "Test Customer",
+        "agent_name": "Test Agent",
+        "action": "Pay Bill",
+        "amount": 3500.0,
+        "decision": "ALLOW",
+        "rule_number": "R5",
+        "explanation": "Test automated verification"
+    },
+    {
+        "request_id": "REQ-4529",
+        "timestamp": "2026-11-18 17:06:29",
+        "customer_name": "Test Customer",
+        "agent_name": "Test Agent",
+        "action": "Pay Bill",
+        "amount": 3500.0,
+        "decision": "ALLOW",
+        "rule_number": "R5",
+        "explanation": "Test automated verification"
+    },
+    {
+        "request_id": "REQ-2427",
+        "timestamp": "2026-11-18 17:06:30",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "action": "Agent Registration",
+        "amount": 0.0,
+        "decision": "ALLOW",
+        "rule_number": "REG",
+        "explanation": "New AI agent 'Aditya Investment Assistant' enrolled with ID AGT-1013. Permissions: View Balance=Yes, Pay Bills=Yes, Transfer Money=Yes."
+    },
+    {
+        "request_id": "REQ-4201",
+        "timestamp": "2026-11-18 17:06:30",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "action": "Pay Bill",
+        "amount": 4800.0,
+        "decision": "ALLOW",
+        "rule_number": "R5",
+        "explanation": "Registered and active agent with customer-granted bill-payment permission can PAY BILLS up to \u20b95,000 automatically (Requested: \u20b94,800.00)."
+    },
+    {
+        "request_id": "REQ-1212",
+        "timestamp": "2026-11-18 17:06:30",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "action": "Agent Revocation",
+        "amount": 0.0,
+        "decision": "BLOCK",
+        "rule_number": "R1",
+        "explanation": "Administrator revoked agent 'Aditya Investment Assistant' (AGT-1013). Revocation Timestamp: 2026-11-18 17:06:30. Reason: Customer lost device containing agent credentials."
     }
 ]
