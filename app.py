@@ -677,6 +677,67 @@ elif menu == "⚡ Request Evaluation":
     agents = storage.load_agents()
     agent_options = [a["agent_name"] for a in agents]
 
+    # Quick Scenario Selector for Testing & Evaluation
+    st.markdown("##### 🎯 Quick Test Scenario Presets (1-Click Viva Presets)")
+    preset_choice = st.selectbox(
+        "Select Test Scenario to Pre-populate Form:",
+        [
+            "Custom Transaction (Manual Entry)",
+            "Scenario 1: Registered Active Agent requesting View Balance -> ALLOW (R4)",
+            "Scenario 2: Unknown Agent requesting a transaction -> BLOCK (R2)",
+            "Scenario 3: Registered Agent requesting Bill Payment of ₹8,000 -> ASK CUSTOMER (R6)",
+            "Scenario 4: Registered Agent with Bill-Payment Permission requesting ₹2,000 -> ALLOW (R5)",
+            "Scenario 5: Revoked Agent requesting a transaction -> BLOCK (R1)",
+            "Scenario 6: Registered Active Agent requesting Transfer Money -> ASK CUSTOMER (R7)"
+        ],
+        index=0,
+        help="Quickly populate the transaction form with the 6 core evaluation scenarios"
+    )
+
+    # Determine default form values based on preset
+    def_mode = "Registered Agent (From Bank Registry)"
+    def_agent = agent_options[0] if agent_options else "Rohan Personal Assistant"
+    def_cust = "Rohan Sharma"
+    def_action = ACTION_VIEW_BALANCE
+    def_amount = 0.0
+
+    if preset_choice.startswith("Scenario 1"):
+        def_mode = "Registered Agent (From Bank Registry)"
+        def_agent = "Rohan Personal Assistant"
+        def_cust = "Rohan Sharma"
+        def_action = ACTION_VIEW_BALANCE
+        def_amount = 0.0
+    elif preset_choice.startswith("Scenario 2"):
+        def_mode = "Simulate Unregistered / Unknown Agent (Test R2)"
+        def_agent = "Rogue Unregistered Scraper Bot"
+        def_cust = "Unknown Person"
+        def_action = ACTION_VIEW_BALANCE
+        def_amount = 0.0
+    elif preset_choice.startswith("Scenario 3"):
+        def_mode = "Registered Agent (From Bank Registry)"
+        def_agent = "Rohan Personal Assistant"
+        def_cust = "Rohan Sharma"
+        def_action = ACTION_PAY_BILL
+        def_amount = 8000.0
+    elif preset_choice.startswith("Scenario 4"):
+        def_mode = "Registered Agent (From Bank Registry)"
+        def_agent = "Rohan Personal Assistant"
+        def_cust = "Rohan Sharma"
+        def_action = ACTION_PAY_BILL
+        def_amount = 2000.0
+    elif preset_choice.startswith("Scenario 5"):
+        def_mode = "Registered Agent (From Bank Registry)"
+        def_agent = "Sneha Expense Manager"
+        def_cust = "Sneha Roy"
+        def_action = ACTION_VIEW_BALANCE
+        def_amount = 0.0
+    elif preset_choice.startswith("Scenario 6"):
+        def_mode = "Registered Agent (From Bank Registry)"
+        def_agent = "Rohan Personal Assistant"
+        def_cust = "Rohan Sharma"
+        def_action = ACTION_TRANSFER_MONEY
+        def_amount = 1500.0
+
     col_in, col_out = st.columns([1, 1], gap="large")
 
     with col_in:
@@ -685,15 +746,17 @@ elif menu == "⚡ Request Evaluation":
             input_mode = st.radio(
                 "Agent Origin Mode:",
                 ["Registered Agent (From Bank Registry)", "Simulate Unregistered / Unknown Agent (Test R2)"],
+                index=0 if def_mode == "Registered Agent (From Bank Registry)" else 1,
                 horizontal=True
             )
 
             if input_mode == "Registered Agent (From Bank Registry)" and agent_options:
-                chosen_agent = st.selectbox("AI Agent Name", agent_options)
+                agent_idx = agent_options.index(def_agent) if def_agent in agent_options else 0
+                chosen_agent = st.selectbox("AI Agent Name", agent_options, index=agent_idx)
                 agent_obj = next((a for a in agents if a["agent_name"] == chosen_agent), None)
                 customer_name = st.text_input(
                     "Customer Name",
-                    value=agent_obj["customer_name"] if agent_obj else "",
+                    value=def_cust if def_agent == chosen_agent else (agent_obj["customer_name"] if agent_obj else ""),
                     help="Name of account holder"
                 )
                 if agent_obj:
@@ -705,13 +768,15 @@ elif menu == "⚡ Request Evaluation":
                         f"Transfer Money: {'✅' if perms.get('transfer_money', True) else '❌'}"
                     )
             else:
-                customer_name = st.text_input("Customer Name", placeholder="e.g., Rajesh Khanna")
-                chosen_agent = st.text_input("AI Agent Name", placeholder="e.g., Unofficial Web Bot")
+                customer_name = st.text_input("Customer Name", value=def_cust if def_mode != "Registered Agent (From Bank Registry)" else "Rajesh Khanna")
+                chosen_agent = st.text_input("AI Agent Name", value=def_agent if def_mode != "Registered Agent (From Bank Registry)" else "Unofficial Web Bot")
 
+            action_list = ACTIONS + ["Invalid Action Demo (e.g. Crypto Trade)"]
+            action_idx = action_list.index(def_action) if def_action in action_list else 0
             action = st.selectbox(
                 "Requested Action",
-                ACTIONS + ["Invalid Action Demo (e.g. Crypto Trade)"],
-                index=0
+                action_list,
+                index=action_idx
             )
 
             if action == ACTION_VIEW_BALANCE:
@@ -722,7 +787,7 @@ elif menu == "⚡ Request Evaluation":
                     "Transaction Amount (₹ INR)",
                     min_value=-5000.0,
                     max_value=10000000.0,
-                    value=3500.0,
+                    value=float(def_amount) if def_amount > 0 else 3500.0,
                     step=500.0,
                     format="%.2f",
                     help="Tip: Enter negative to test R3, <= ₹5,000 to test R5, or > ₹5,000 to test R6."

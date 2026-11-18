@@ -180,5 +180,19 @@
         },
         "revoked_at": "2026-11-18 17:06:30",
         "revocation_reason": "Customer lost device containing agent credentials"
+    },
+    {
+        "agent_id": "AGT-1014",
+        "customer_name": "ASIF ANSARI",
+        "agent_name": "Ansari.bot",
+        "registration_date": "2026-11-18 19:41:47",
+        "status": "ACTIVE",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": null,
+        "revocation_reason": null
     }
 ]

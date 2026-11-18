@@ -62,6 +62,14 @@ def evaluate_request(
     cust_clean = (customer_name or "").strip()
     agent_clean = (agent_name or "").strip()
 
+    # Automatic storage resolution if agent_record is not explicitly provided
+    if agent_record is None and agent_clean:
+        try:
+            import storage
+            agent_record = storage.get_agent_by_name(agent_clean)
+        except Exception:
+            pass
+
     # =========================================================================
     # R1: REVOCATION CHECK (Must be checked before every other rule)
     # If an AI agent has been revoked, all its requests must be BLOCKED.
