@@ -988,5 +988,71 @@
         "decision": "ALLOW",
         "rule_number": "R5",
         "explanation": "Test automated verification"
+    },
+    {
+        "request_id": "REQ-2676",
+        "timestamp": "2026-11-19 23:09:04",
+        "customer_name": "Rohan Sharma",
+        "agent_name": "Rohan Personal Assistant",
+        "action": "View Balance",
+        "amount": 0.0,
+        "decision": "ALLOW",
+        "rule_number": "R4",
+        "explanation": "Registered and active AI agents can VIEW BALANCE without additional customer confirmation."
+    },
+    {
+        "request_id": "REQ-4272",
+        "timestamp": "2026-11-19 23:10:19",
+        "customer_name": "AJAY",
+        "agent_name": "Rogue Unregistered Scraper Bot",
+        "action": "View Balance",
+        "amount": 0.0,
+        "decision": "BLOCK",
+        "rule_number": "R2",
+        "explanation": "AI agent 'Rogue Unregistered Scraper Bot' is not registered with ICICI Bank. Request must be BLOCKED."
+    },
+    {
+        "request_id": "REQ-5369",
+        "timestamp": "2026-11-19 23:11:20",
+        "customer_name": "Ananya Deshmukh",
+        "agent_name": "Ananya FinOps Agent",
+        "action": "Pay Bill",
+        "amount": 8000.0,
+        "decision": "ASK CUSTOMER",
+        "rule_number": "R6",
+        "explanation": "Bill payments above \u20b95,000 must return ASK CUSTOMER (Requested: \u20b98,000.00 > \u20b95,000.00)."
+    },
+    {
+        "request_id": "REQ-8798",
+        "timestamp": "2026-11-19 23:12:02",
+        "customer_name": "Ananya Deshmukh",
+        "agent_name": "Ananya FinOps Agent",
+        "action": "Pay Bill",
+        "amount": 2000.0,
+        "decision": "ALLOW",
+        "rule_number": "R5",
+        "explanation": "Registered and active agent with customer-granted bill-payment permission can PAY BILLS up to \u20b95,000 automatically (Requested: \u20b92,000.00)."
+    },
+    {
+        "request_id": "REQ-3246",
+        "timestamp": "2026-11-19 23:12:27",
+        "customer_name": "Sneha Roy",
+        "agent_name": "Sneha Expense Manager",
+        "action": "View Balance",
+        "amount": 0.0,
+        "decision": "BLOCK",
+        "rule_number": "R1",
+        "explanation": "Agent 'Sneha Expense Manager' has been permanently REVOKED on 2026-11-15 11:00:00 (Revoked by bank administrator due to suspicious transaction pattern). All requests from revoked agents must be BLOCKED."
+    },
+    {
+        "request_id": "REQ-8547",
+        "timestamp": "2026-11-19 23:12:48",
+        "customer_name": "Rohan Sharma",
+        "agent_name": "Rohan Personal Assistant",
+        "action": "Transfer Money",
+        "amount": 1500.0,
+        "decision": "ASK CUSTOMER",
+        "rule_number": "R7",
+        "explanation": "Every TRANSFER MONEY request must return ASK CUSTOMER, regardless of the amount (Requested: \u20b91,500.00)."
     }
 ]
