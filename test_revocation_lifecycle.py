@@ -25,8 +25,9 @@ def run_revocation_lifecycle_test():
     # -------------------------------------------------------------
     # STEP 1: Register a new AI Agent
     # -------------------------------------------------------------
+    from datetime import datetime
     customer_name = "Kavita Rao"
-    agent_name = "Kavita Autonomous FinBot"
+    agent_name = f"Kavita Lifecycle FinBot {datetime.now().strftime('%H%M%S')}"
 
     print("\n[STEP 1] Registering New AI Agent...")
     new_agent = storage.save_agent(
@@ -91,7 +92,7 @@ def run_revocation_lifecycle_test():
     assert revoke_success is True, "Revocation function must return True"
 
     # Reload agent directly from permanent JSON storage to verify persistence
-    reloaded_agent = storage.get_agent_by_name(agent_name)
+    reloaded_agent = storage.get_agent_by_id(agent_id) or storage.get_agent_by_name(agent_name)
     print(f"  -> Revocation Successful:  {revoke_success}")
     print(f"  -> Updated Status:         {reloaded_agent['status']}")
     print(f"  -> Exact Revocation Time:  {reloaded_agent['revoked_at']}")

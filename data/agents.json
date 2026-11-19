@@ -208,5 +208,61 @@
         },
         "revoked_at": null,
         "revocation_reason": null
+    },
+    {
+        "agent_id": "AGT-1016",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "registration_date": "2026-11-19 22:44:34",
+        "status": "REVOKED",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": "2026-11-19 22:44:34",
+        "revocation_reason": "Customer lost device containing agent credentials"
+    },
+    {
+        "agent_id": "AGT-1017",
+        "customer_name": "Kavita Rao",
+        "agent_name": "Kavita Autonomous FinBot",
+        "registration_date": "2026-11-19 22:44:38",
+        "status": "REVOKED",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": "2026-11-19 22:44:38",
+        "revocation_reason": "Security Audit: Compromised API key and anomalous frequency detected"
+    },
+    {
+        "agent_id": "AGT-1018",
+        "customer_name": "Kavita Rao",
+        "agent_name": "Kavita Lifecycle FinBot 225440",
+        "registration_date": "2026-11-19 22:54:40",
+        "status": "REVOKED",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": "2026-11-19 22:54:40",
+        "revocation_reason": "Security Audit: Compromised API key and anomalous frequency detected"
+    },
+    {
+        "agent_id": "AGT-1019",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "registration_date": "2026-11-19 22:54:54",
+        "status": "REVOKED",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": "2026-11-19 22:54:54",
+        "revocation_reason": "Customer lost device containing agent credentials"
     }
 ]

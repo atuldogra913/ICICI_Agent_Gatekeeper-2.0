@@ -256,10 +256,19 @@ def revoke_agent(agent_id: str, reason: str = "Revoked by Administrator") -> boo
 
     return updated
 
-def get_agent_by_name(agent_name: str) -> Optional[Dict[str, Any]]:
-    """Find an agent record by agent name."""
+def get_agent_by_id(agent_id: str) -> Optional[Dict[str, Any]]:
+    """Find an agent record by agent ID."""
+    ensure_data_directory()
     agents = load_agents()
     for agent in agents:
+        if agent.get("agent_id", "").strip().upper() == agent_id.strip().upper():
+            return agent
+    return None
+
+def get_agent_by_name(agent_name: str) -> Optional[Dict[str, Any]]:
+    """Find an agent record by agent name (returns most recent matching entry)."""
+    agents = load_agents()
+    for agent in reversed(agents):
         if agent["agent_name"].strip().lower() == agent_name.strip().lower():
             return agent
     return None
