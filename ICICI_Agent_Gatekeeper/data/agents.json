@@ -1,0 +1,268 @@
+[
+    {
+        "agent_id": "AGT-1001",
+        "customer_name": "Rohan Sharma",
+        "agent_name": "Rohan Personal Assistant",
+        "registration_date": "2026-11-10 10:30:00",
+        "status": "ACTIVE",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": null,
+        "revocation_reason": null
+    },
+    {
+        "agent_id": "AGT-1002",
+        "customer_name": "Priya Nair",
+        "agent_name": "Priya SmartFin Bot",
+        "registration_date": "2026-11-12 14:15:00",
+        "status": "ACTIVE",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": null,
+        "revocation_reason": null
+    },
+    {
+        "agent_id": "AGT-1003",
+        "customer_name": "Amitabh Patel",
+        "agent_name": "Amitabh ReadOnly Agent",
+        "registration_date": "2026-11-14 09:45:00",
+        "status": "ACTIVE",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": false,
+            "transfer_money": false
+        },
+        "revoked_at": null,
+        "revocation_reason": null
+    },
+    {
+        "agent_id": "AGT-1004",
+        "customer_name": "Sneha Roy",
+        "agent_name": "Sneha Expense Manager",
+        "registration_date": "2026-11-05 16:20:00",
+        "status": "REVOKED",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": "2026-11-15 11:00:00",
+        "revocation_reason": "Revoked by bank administrator due to suspicious transaction pattern"
+    },
+    {
+        "agent_id": "AGT-1005",
+        "customer_name": "ATUL DOGRA",
+        "agent_name": "Atul's bot",
+        "registration_date": "2026-11-17 21:48:20",
+        "status": "ACTIVE",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": null,
+        "revocation_reason": null
+    },
+    {
+        "agent_id": "AGT-1006",
+        "customer_name": "Vikram Malhotra",
+        "agent_name": "Vikram WealthGPT Assistant",
+        "registration_date": "2026-11-15 11:10:00",
+        "status": "ACTIVE",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": null,
+        "revocation_reason": null
+    },
+    {
+        "agent_id": "AGT-1007",
+        "customer_name": "Ananya Deshmukh",
+        "agent_name": "Ananya FinOps Agent",
+        "registration_date": "2026-11-15 15:20:00",
+        "status": "ACTIVE",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": null,
+        "revocation_reason": null
+    },
+    {
+        "agent_id": "AGT-1008",
+        "customer_name": "Rajesh Verma",
+        "agent_name": "Rajesh AutoPay Utility Bot",
+        "registration_date": "2026-11-16 09:15:00",
+        "status": "ACTIVE",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": false
+        },
+        "revoked_at": null,
+        "revocation_reason": null
+    },
+    {
+        "agent_id": "AGT-1009",
+        "customer_name": "Kavita Rao",
+        "agent_name": "Kavita Autonomous FinBot",
+        "registration_date": "2026-11-16 14:40:00",
+        "status": "ACTIVE",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": null,
+        "revocation_reason": null
+    },
+    {
+        "agent_id": "AGT-1010",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Portfolio Manager",
+        "registration_date": "2026-11-17 10:05:00",
+        "status": "ACTIVE",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": null,
+        "revocation_reason": null
+    },
+    {
+        "agent_id": "AGT-1011",
+        "customer_name": "Meera Kapoor",
+        "agent_name": "Meera Daily Budget Bot",
+        "registration_date": "2026-11-17 16:30:00",
+        "status": "ACTIVE",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": false
+        },
+        "revoked_at": null,
+        "revocation_reason": null
+    },
+    {
+        "agent_id": "AGT-1012",
+        "customer_name": "Siddharth Jain",
+        "agent_name": "Siddharth Crypto Arb Agent",
+        "registration_date": "2026-11-10 08:30:00",
+        "status": "REVOKED",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": false,
+            "transfer_money": false
+        },
+        "revoked_at": "2026-11-18 10:15:00",
+        "revocation_reason": "Administrative freeze: Attempted unauthorized high-frequency automated transactions"
+    },
+    {
+        "agent_id": "AGT-1013",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "registration_date": "2026-11-18 17:06:30",
+        "status": "REVOKED",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": "2026-11-18 17:06:30",
+        "revocation_reason": "Customer lost device containing agent credentials"
+    },
+    {
+        "agent_id": "AGT-1014",
+        "customer_name": "ASIF ANSARI",
+        "agent_name": "Ansari.bot",
+        "registration_date": "2026-11-18 19:41:47",
+        "status": "ACTIVE",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": null,
+        "revocation_reason": null
+    },
+    {
+        "agent_id": "AGT-1015",
+        "customer_name": "asif",
+        "agent_name": "Asif bot",
+        "registration_date": "2026-11-18 22:42:59",
+        "status": "ACTIVE",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": null,
+        "revocation_reason": null
+    },
+    {
+        "agent_id": "AGT-1016",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "registration_date": "2026-11-19 22:44:34",
+        "status": "REVOKED",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": "2026-11-19 22:44:34",
+        "revocation_reason": "Customer lost device containing agent credentials"
+    },
+    {
+        "agent_id": "AGT-1017",
+        "customer_name": "Kavita Rao",
+        "agent_name": "Kavita Autonomous FinBot",
+        "registration_date": "2026-11-19 22:44:38",
+        "status": "REVOKED",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": "2026-11-19 22:44:38",
+        "revocation_reason": "Security Audit: Compromised API key and anomalous frequency detected"
+    },
+    {
+        "agent_id": "AGT-1018",
+        "customer_name": "Kavita Rao",
+        "agent_name": "Kavita Lifecycle FinBot 225440",
+        "registration_date": "2026-11-19 22:54:40",
+        "status": "REVOKED",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": "2026-11-19 22:54:40",
+        "revocation_reason": "Security Audit: Compromised API key and anomalous frequency detected"
+    },
+    {
+        "agent_id": "AGT-1019",
+        "customer_name": "Aditya Sen",
+        "agent_name": "Aditya Investment Assistant",
+        "registration_date": "2026-11-19 22:54:54",
+        "status": "REVOKED",
+        "permissions": {
+            "view_balance": true,
+            "pay_bills": true,
+            "transfer_money": true
+        },
+        "revoked_at": "2026-11-19 22:54:54",
+        "revocation_reason": "Customer lost device containing agent credentials"
+    }
+]
